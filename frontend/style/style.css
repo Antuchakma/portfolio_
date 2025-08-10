@@ -1,0 +1,19 @@
+body{
+background-color: rgb(1, 79, 79);
+font-family: monospace;
+background-image: 
+                linear-gradient(to right, rgba(94, 138, 120, 0.138)  1px, transparent 1px),
+                linear-gradient(to bottom,rgba(94, 138, 120, 0.138) 1px, transparent 1px);
+background-size: 20px 20px;
+}
+
+#navbar{
+    width: 100%;
+    font-weight: 600;
+    font-size:x-large ;
+    color: beige;
+    gap: 6; 
+    display: flex;
+    justify-content: end;
+    margin-right: auto;    
+}
