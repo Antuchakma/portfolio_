@@ -1,19 +1,64 @@
-body{
-background-color: rgb(1, 79, 79);
-font-family: monospace;
-background-image: 
-                linear-gradient(to right, rgba(94, 138, 120, 0.138)  1px, transparent 1px),
-                linear-gradient(to bottom,rgba(94, 138, 120, 0.138) 1px, transparent 1px);
-background-size: 20px 20px;
+/* Global settings */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: monospace;
+  background-color: #112240; /* Dark navy inspired by Brittany’s palette */
+  color: #ccd6f6;
 }
 
-#navbar{
-    width: 100%;
-    font-weight: 600;
-    font-size:x-large ;
-    color: beige;
-    gap: 6; 
-    display: flex;
-    justify-content: end;
-    margin-right: auto;    
+/* Sidebar (sticky navigation) */
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.navlink {
+  text-decoration: none;
+  color: #8892b0;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.navlink.active {
+  color: #64ffda; /* Green accent like Brittany’s */
+}
+
+/* Main content area */
+#main-content {
+  margin-left: 20%;
+  width: 80%;
+}
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+section.active {
+  opacity: 1;
+}
+
+/* Hero section style */
+.hero h1 {
+  font-size: 3em;
+  margin: 0;
+}
+.hero p {
+  font-size: 1.5em;
+  margin-top: 10px;
 }
