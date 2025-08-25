@@ -1,0 +1,14 @@
+# Ignore Visual Studio temporary files
+.vs/
+bin/
+obj/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Node.js (if any frontend tools)
+node_modules/
+dist/
