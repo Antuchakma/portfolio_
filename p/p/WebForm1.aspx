@@ -3,279 +3,197 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>My Portfolio</title>
+    <title>Antu | Portfolio</title>
+    <!-- Devicon for programming icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <!-- Simple icons fallback -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v5/font/simple-icons.min.css">
+
     <style>
-        /* Global Styles */
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
             scroll-behavior: smooth;
-            background: #0f172a; /* universal background color */
-            color: #e0e0e0;
-            display: flex;
         }
 
-        a {
-            text-decoration: none;
-        }
+        a { text-decoration: none; color: inherit; }
 
-        /* Left Navbar */
+        /* Navbar */
         .navbar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 220px; /* slightly wider */
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 30px;
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
             z-index: 1000;
         }
 
-        /* Name / Logo at top */
         .navbar .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #00e5ff;
-            margin-bottom: 40px;
+            font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; color: #4facfe;
         }
 
-        .navbar a {
-            color: #e0e0e0;
-            padding: 12px 10px; /* slightly smaller */
-            text-transform: uppercase;
-            font-weight: 600;
-            width: 100%;
-            text-align: center;
-            margin: 5px 0;
-            transition: color 0.3s, transform 0.3s;
-            border-radius: 8px;
-            font-size: 0.95rem; /* smaller font for menu */
-        }
+        .navbar ul { display: flex; list-style: none; gap: 30px; }
+        .navbar ul li a { font-weight: 600; transition: color 0.3s; }
+        .navbar ul li a:hover { color: #ff6ec7; }
 
-        .navbar a:hover {
-            color: #00e5ff;
-            transform: translateX(5px);
-        }
-
-        /* Main Content */
-        .content {
-            margin-left: 220px; /* match navbar width */
-            width: calc(100% - 220px);
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #e0e0e0;
-            text-align: center;
-            flex-direction: column;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-top: 15px;
-            color: #a0c4ff;
-        }
-
-        /* Sections */
-        section {
-            padding: 100px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards;
-        }
-
-        section:nth-of-type(1) { animation-delay: 0.3s; }
-        section:nth-of-type(2) { animation-delay: 0.5s; }
-        section:nth-of-type(3) { animation-delay: 0.7s; }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 50px;
-            color: #ffffff;
-            font-size: 2.5rem;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1400&q=80') no-repeat center/cover;
             position: relative;
         }
+        .hero::after {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+        }
+        .hero h1, .hero p { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 4rem; background: linear-gradient(90deg, #ff6ec7, #4facfe);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.3rem; margin-top: 15px; }
 
-        h2::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 4px;
-            background: #00e5ff;
-            margin: 10px auto 0;
-            border-radius: 2px;
+        /* Section General */
+        section { padding: 100px 60px; max-width: 1100px; margin: auto; text-align: center; }
+        section h2 { font-size: 2.5rem; margin-bottom: 40px; color: #4facfe; }
+
+        /* About */
+        #about p { font-size: 1.2rem; line-height: 1.8; color: #ddd; margin-bottom: 40px; }
+
+        .skills {
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 30px; margin-top: 20px;
+        }
+
+        .skills i {
+            font-size: 3rem; transition: transform 0.3s ease;
+        }
+
+        .skills i:hover {
+            transform: scale(1.2);
         }
 
         /* Portfolio */
         .portfolio-items {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
-
         .portfolio-item {
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
             overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            transition: transform 0.5s, box-shadow 0.5s, background 0.5s;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-
-        .portfolio-item img {
-            width: 100%;
-            display: block;
-            transition: transform 0.5s;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .portfolio-item h3 {
-            margin: 15px;
-            font-size: 1.3rem;
-            color: #e0e0e0;
-            text-align: center;
-            transition: color 0.3s;
-        }
-
-        .portfolio-item:hover h3 {
-            color: #00e5ff;
-        }
+        .portfolio-item img { width: 100%; display: block; }
+        .portfolio-item:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .portfolio-item h3 { margin: 15px; }
 
         /* Contact */
-        #contact p {
-            font-size: 1.1rem;
-            text-align: center;
-            margin: 8px 0;
-        }
+        #contact p { font-size: 1.1rem; margin: 8px 0; color: #ccc; }
 
         /* Footer */
         footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: #0f172a;
-            color: #e0e0e0;
-            font-size: 0.9rem;
+            background: rgba(0,0,0,0.6);
+            padding: 30px; text-align: center;
+            font-size: 0.9rem; color: #aaa;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Smooth scroll for links */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Responsive adjustments */
-        @media screen and (max-width: 768px) {
-            .navbar {
-                width: 60px;
-                padding-top: 20px;
-            }
-            .navbar .logo {
-                font-size: 1.2rem;
-                margin-bottom: 20px;
-            }
-            .navbar a {
-                padding: 10px 5px;
-                font-size: 0.8rem;
-            }
-            .content {
-                margin-left: 60px;
-                width: calc(100% - 60px);
-            }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 10px; }
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 80px 20px; }
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- Left Navbar -->
+        <!-- Navbar -->
         <div class="navbar">
-            <div class="logo">My Name</div>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
+            <div class="logo">Antu</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Hero Section -->
-            <div id="home" class="hero">
-                <h1>My Portfolio</h1>
-                <p>Frontend Developer | Designer | Problem Solver</p>
-            </div>
+        <!-- Hero -->
+        <div id="home" class="hero">
+            <h1>Hello, I'm Antu</h1>
+            <p>Full-Stack Developer | Designer | Creator</p>
+        </div>
 
-            <!-- About Section -->
-            <section id="about">
-                <h2>About Me</h2>
-                <p>Hello! I'm a passionate developer who loves creating beautiful and functional websites. I specialize in ASP.NET, C#, and front-end development. I focus on creating clean, user-friendly, and modern interfaces that leave a lasting impression.</p>
-            </section>
+        <!-- About -->
+      
+<section id="about">
+    <h2>About Me</h2>
+    <p>
+        I'm a creative and detail-oriented developer passionate about building interactive 
+        and functional web solutions. I love turning ideas into reality with modern 
+        technologies and clean design.
+    </p>
 
-            <!-- Portfolio Section -->
-            <section id="portfolio">
-                <h2>My Work</h2>
-                <div class="portfolio-items">
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300" alt="Project 1" />
-                        <h3>Project 1</h3>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300" alt="Project 2" />
-                        <h3>Project 2</h3>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://via.placeholder.com/400x300" alt="Project 3" />
-                        <h3>Project 3</h3>
-                    </div>
+    <!-- Languages -->
+    <h3 style="margin-top: 40px; color: #ff6ec7;">Languages I Know</h3>
+    <div class="skills">
+        <i class="devicon-c-plain colored" title="C"></i>
+        <i class="devicon-cplusplus-plain colored" title="C++"></i>
+        <i class="devicon-java-plain colored" title="Java"></i>
+        <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+        <i class="devicon-python-plain colored" title="Python"></i>
+    </div>
+
+    <!-- Frameworks and Tools -->
+    <h3 style="margin-top: 40px; color: #4facfe;">Frameworks & Tools</h3>
+    <div class="skills">
+        <i class="devicon-react-original colored" title="React (MERN)"></i>
+        <i class="devicon-nodejs-plain colored" title="Node.js (MERN)"></i>
+        <i class="devicon-express-original colored" title="Express (MERN)"></i>
+        <i class="devicon-mongodb-plain colored" title="MongoDB (MERN)"></i>
+        <i class="devicon-postman-plain colored" title="Postman"></i>
+        <i class="devicon-unity-original colored" title="Unity"></i>
+    </div>
+</section>
+
+
+        <!-- Portfolio -->
+        <section id="portfolio">
+            <h2>My Work</h2>
+            <div class="portfolio-items">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x250" alt="Project 1"/>
+                    <h3>Project 1</h3>
                 </div>
-            </section>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x250" alt="Project 2"/>
+                    <h3>Project 2</h3>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x250" alt="Project 3"/>
+                    <h3>Project 3</h3>
+                </div>
+            </div>
+        </section>
 
-            <!-- Contact Section -->
-            <section id="contact">
-                <h2>Contact Me</h2>
-                <p>Email: myemail@example.com</p>
-                <p>Phone: +123 456 7890</p>
-            </section>
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: myemail@example.com</p>
+            <p>Phone: +123 456 7890</p>
+        </section>
 
-            <!-- Footer -->
-            <footer>
-                &copy; 2025 My Portfolio. All rights reserved.
-            </footer>
-        </div>
+        <!-- Footer -->
+        <footer>
+            © 2025 Antu. Built with ❤️ in ASP.NET
+        </footer>
     </form>
 </body>
 </html>
